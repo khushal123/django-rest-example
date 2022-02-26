@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,12 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#23ig4%hqdo*u+fw)$)wr2mkvr=+=nyy(=4a(%+rgt3ksvtc23'
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-#23ig4%hqdo*u+fw)$)wr2mkvr=+=nyy(=4a(%+rgt3ksvtc23")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = []
+
+
 
 
 # Application definition
@@ -37,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    "user"
+   
 ]
 
 MIDDLEWARE = [
@@ -74,12 +80,15 @@ WSGI_APPLICATION = 'drf_assignment.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+DATABASE_URI = os.getenv("DATABSE_URI", "")
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+
 }
+
+DATABASES['default'] =  dj_database_url.config(default=DATABASE_URI)
+
+
 
 
 # Password validation
