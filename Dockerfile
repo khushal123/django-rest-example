@@ -7,5 +7,5 @@ COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
 COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["sh", "docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["run"]
