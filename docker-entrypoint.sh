@@ -3,5 +3,5 @@
 echo "Apply database migrations"
 python manage.py migrate
 
-# echo "runserver"
-# python manage.py runserver 0.0.0.0:8000
+echo "runserver"
+gunicorn drf_assignment.wsgi:application --bind 0.0.0.0:$PORT
