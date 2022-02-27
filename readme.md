@@ -20,11 +20,13 @@
 - Docker compose
 
 ## Installation Standalone
+Please change the values of env variables after copying the env file
 ```sh
 python3 -m venv 3.8
 source 3.8/bin/activate
 git clone https://github.com/khushal123/django-rest-example.git
 cd django-rest-example/
+cp -r bin/locals.env.example bin/locals.env
 python -m pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver 
