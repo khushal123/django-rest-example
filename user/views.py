@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from itsdangerous import Serializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,7 +13,7 @@ class UserView(APIView):
     def get(self, request, format=None):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializer = UserSerializer(data=request.data)
